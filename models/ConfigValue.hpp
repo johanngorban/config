@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include <map>
+#include <vector>
 #include <memory>
 
 namespace Config {
@@ -67,10 +67,10 @@ namespace Config {
 
     class ValueArray {
     private:
-        std::map<std::string, value_ptr> values;
+        std::vector<value_ptr> values;
     public:
-        void add(const std::string &name, value_ptr value);
+        void add(value_ptr value);
 
-        const Value &operator [] (const std::string &name) const;
+        const Value &operator[](const std::string &name) const;
     };
 }

@@ -2,7 +2,9 @@
 
 #include <exception>
 
-Config::Value::Value(const std::string &name) : name_(name) {}
+Config::Value::Value(
+    const std::string &name
+) : name_(name) {}
 
 std::string Config::Value::getName() const noexcept {
     return name_;
@@ -61,18 +63,31 @@ bool Config::BoolValue::toBool() const {
 }
 
 void ValueArray::add(
-    const std::string &name, 
     value_ptr value
 ) {
-    if (values.count(name)) {
-        throw std::runtime_error(
-            "Cannot add value. Property with such name exists: " + name
-        );
+    const std::string &name = value->getName();
+
+    for (const value_ptr &it : values) {
+        if (it->getName() == name) {
+            throw std::runtime_error(
+                "Value with such name already exists: " + name
+            );
+        }
     }
 
-    values[name] = std::move(value);
+    values.push_back(std::move(val));
 }
 
-const Value &ValueArray::operator [] (const std::string &name) const {
-    return *values.at(name);
+const Value &ValueArray::operator[](
+    const std::string &name
+) const {
+    for (const value_ptr &val : values) {
+        if (val->getName() == name) {
+            return *val;
+        }
+    }
+
+    throw std::runtime_error(
+        "Value with such name doesn't exist: " + name
+    );
 }
