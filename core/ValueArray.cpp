@@ -1,5 +1,7 @@
 #include "ValueArray.hpp"
 
+using namespace Config::Core;
+
 void ValueArray::add(
     value_ptr value
 ) {
@@ -13,7 +15,7 @@ void ValueArray::add(
         }
     }
 
-    values.push_back(std::move(val));
+    values.push_back(std::move(value));
 }
 
 const Value &ValueArray::operator[](

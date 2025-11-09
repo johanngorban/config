@@ -5,12 +5,14 @@
 #include <vector>
 
 namespace Config {
-    class ValueArray {
-    private:
-        std::vector<value_ptr> values;
-    public:
-        void add(value_ptr value);
+    namespace Core {
+        class ValueArray {
+        private:
+            std::vector<value_ptr> values;
+        public:
+            void add(value_ptr value);
 
-        const Value &operator[](const std::string &name) const;
-    };
+            const Value &operator[](const std::string &name) const;
+        };
+    }
 }

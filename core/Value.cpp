@@ -2,6 +2,8 @@
 
 #include <exception>
 
+using namespace Config::Core;
+
 Config::Value::Value(
     const std::string &name
 ) : name_(name) {}
