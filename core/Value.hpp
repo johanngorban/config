@@ -28,15 +28,6 @@ namespace Config {
             virtual bool toBool() const = 0;
         };
 
-        class IntValue : public Value {
-        private:
-            int data_;
-        public:
-            IntValue(const std::string &name, int data);
-        public:
-            int toInt() const override;
-        };
-
         class StringValue : public Value {
         private:
             std::string data_;
@@ -46,13 +37,15 @@ namespace Config {
             std::string toString() const override;
         };
 
-        class DoubleValue : public Value {
+        class NumberValue : public Value {
         private:
             double data_;
         public:
-            DoubleValue(const std::string &name, double data);
+            NumberValue(const std::string &name, double data);
         public:
             double toDouble() const override;
+
+            int toInt() const override;
         };
 
         class BoolValue : public Value {

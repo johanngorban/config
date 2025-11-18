@@ -4,62 +4,57 @@
 
 using namespace Config::Core;
 
-Config::Value::Value(
+Value::Value(
     const std::string &name
 ) : name_(name) {}
 
-std::string Config::Value::getName() const noexcept {
+std::string Value::getName() const noexcept {
     return name_;
 }
 
-int Config::Value::toInt() const {
+int Value::toInt() const {
     throw std::runtime_error("Cannot convert to integer");
 }
 
-std::string Config::Value::toString() const {
+std::string Value::toString() const {
     throw std::runtime_error("Cannot convert to string");
 }
 
-double Config::Value::toDouble() const {
+double Value::toDouble() const {
     throw std::runtime_error("Cannot convert to double");
 }
 
-bool Config::Value::toBool() const {
+bool Value::toBool() const {
     throw std::runtime_error("Cannot convert to bool");
 }
 
-Config::IntValue::IntValue(
-    const std::string &name, 
-    int data
-) : Value(name), data_(data) {}
-
-int Config::IntValue::toInt() const {
-    return data_;
-}
-
-Config::StringValue::StringValue(
+StringValue::StringValue(
     const std::string &name, 
     const std::string &data
 ) : Value(name), data_(data) {}
 
-std::string Config::StringValue::toString() const {
+std::string StringValue::toString() const {
     return data_;
 }
 
-Config::DoubleValue::DoubleValue(
+NumberValue::NumberValue(
     const std::string &name, 
     double data
 ) : Value(name), data_(data) {}
 
-double Config::DoubleValue::toDouble() const {
+double NumberValue::toDouble() const {
     return data_;
 }
 
-Config::BoolValue::BoolValue(
+double NumberValue::toInt() const {
+    return static_cast<int>(data_);
+}
+
+BoolValue::BoolValue(
     const std::string &name, 
     bool data
 ) : Value(name), data_(data) {}
 
-bool Config::BoolValue::toBool() const {
+bool BoolValue::toBool() const {
     return data_;
 }
